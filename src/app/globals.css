@@ -1,0 +1,344 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* shadcn surface tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* StudioSpace brand roles */
+  --color-gel: var(--gel);
+  --color-tungsten: var(--tungsten);
+  --color-daylight: var(--daylight);
+  --color-positive: var(--positive);
+  --color-cyc: var(--cyc);
+  --color-flag: var(--flag);
+
+  /* Category gels — always paired with an icon and a label */
+  --color-category-photo: var(--category-photo);
+  --color-category-film: var(--category-film);
+  --color-category-podcast: var(--category-podcast);
+  --color-category-music: var(--category-music);
+  --color-category-workshop: var(--category-workshop);
+
+  /* Type */
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-display);
+
+  /* Radius by role: controls 8px, cards 10px, dialogs 14px, tape 3px */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
+  --radius-2xl: 14px;
+  --radius-3xl: 18px;
+  --radius-4xl: 22px;
+  --radius-control: 8px;
+  --radius-card: 10px;
+  --radius-dialog: 14px;
+  --radius-tape: 3px;
+}
+
+:root {
+  color-scheme: light;
+
+  /* Cyc white set */
+  --background: #eef1f6;
+  --foreground: #16213a;
+  --card: #ffffff;
+  --card-foreground: #16213a;
+  --popover: #ffffff;
+  --popover-foreground: #16213a;
+
+  --primary: #d81e6b;
+  --primary-foreground: #ffffff;
+  --secondary: #e3e8f1;
+  --secondary-foreground: #16213a;
+  --muted: #e4e9f2;
+  --muted-foreground: #5b6578;
+  --accent: #fbe3ee;
+  --accent-foreground: #9c1450;
+  --destructive: #c62828;
+  --destructive-foreground: #ffffff;
+
+  --border: #d8dee9;
+  --input: #d8dee9;
+  --ring: #d81e6b;
+
+  --gel: #d81e6b;
+  --tungsten: #f2a33a;
+  --daylight: #2d6bff;
+  --positive: #1f9d6b;
+  --cyc: #eef1f6;
+  --flag: #16213a;
+
+  --category-photo: #2d6bff;
+  --category-film: #d81e6b;
+  --category-podcast: #f2a33a;
+  --category-music: #7a4dff;
+  --category-workshop: #1f9d6b;
+
+  --radius: 8px;
+}
+
+.dark {
+  color-scheme: dark;
+
+  /* Blackout set */
+  --background: #0c1222;
+  --foreground: #e8ecf5;
+  --card: #141c30;
+  --card-foreground: #e8ecf5;
+  --popover: #141c30;
+  --popover-foreground: #e8ecf5;
+
+  --primary: #ff4f97;
+  --primary-foreground: #0c1222;
+  --secondary: #1c2740;
+  --secondary-foreground: #e8ecf5;
+  --muted: #1a2338;
+  --muted-foreground: #9aa6bf;
+  --accent: #2a1730;
+  --accent-foreground: #ff9cc1;
+  --destructive: #ff6b6b;
+  --destructive-foreground: #0c1222;
+
+  --border: #25304a;
+  --input: #25304a;
+  --ring: #ff4f97;
+
+  --gel: #ff4f97;
+  --tungsten: #f5b35a;
+  --daylight: #6b96ff;
+  --positive: #4ed3a1;
+  --cyc: #0c1222;
+  --flag: #141c30;
+
+  --category-photo: #6b96ff;
+  --category-film: #ff4f97;
+  --category-podcast: #f5b35a;
+  --category-music: #a58bff;
+  --category-workshop: #4ed3a1;
+
+  --radius: 8px;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-foreground;
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    font-variation-settings:
+      "wdth" 96,
+      "opsz" 48;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    line-height: 1.1;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    line-height: 1.35;
+    font-weight: 600;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    text-underline-offset: 3px;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 26%, transparent);
+    color: var(--foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* 1200px production-office container, on a 4px grid */
+  .container-page {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 32px;
+    }
+  }
+
+  .section {
+    padding-block: 64px;
+  }
+
+  @media (min-width: 768px) {
+    .section {
+      padding-block: 96px;
+    }
+  }
+
+  /* Hairline used to separate stacked content without shadows */
+  .rule {
+    border-block-start: 1px solid var(--border);
+  }
+}
+
+@utility text-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  font-variation-settings:
+    "wdth" 96,
+    "opsz" 48;
+  text-wrap: balance;
+}
+
+@utility text-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  font-variation-settings:
+    "wdth" 96,
+    "opsz" 32;
+  text-wrap: balance;
+}
+
+@utility text-h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+@utility text-lede {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+
+/* Body copy never runs wider than 70 characters */
+@utility measure {
+  max-width: 70ch;
+}
+
+@utility measure-tight {
+  max-width: 56ch;
+}
+
+@layer utilities {
+  /* Hero: the gel cone sweeps in, then the headline settles. */
+  .animate-hero-sweep {
+    animation: hero-cone-sweep 1400ms cubic-bezier(0.22, 1, 0.36, 1) 150ms both;
+  }
+
+  .animate-hero-settle {
+    animation: hero-headline-settle 900ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both;
+  }
+}
+
+@keyframes hero-cone-sweep {
+  from {
+    opacity: 0;
+    transform: scaleY(0.55) translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+  }
+}
+
+@keyframes hero-headline-settle {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
