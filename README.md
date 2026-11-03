@@ -1,54 +1,127 @@
 # StudioSpace
 
-StudioSpace is a marketplace for booking independent creative spaces by the
-hour. This repository contains the Next.js client; the Express API is maintained
-separately.
+StudioSpace is a marketplace for booking independent creative spaces by the hour. Hosts list their studios, and customers search, compare, and book them.
 
-**Live URL:** Not deployed.
+This repository contains the **Next.js client**. The Express API lives in a separate repository: [StudioSpaceServer](https://github.com/masudmoon695-alt/StudioSpaceServer).
+
+**Live site:** [studiospaceclient.vercel.app](https://studiospaceclient.vercel.app)
+**API:** [studiospaceserver-five.vercel.app](https://studiospaceserver-five.vercel.app)
+
+---
 
 ## Features
 
-- Search studios by name or location, category, hourly price and capacity.
-- Compare studio rates, refundable deposits, amenities, host details and reviews.
-- Request a date and time with a live price estimate and booking status tracking.
-- Publish, update and remove studio listings.
-- Review and confirm or decline incoming booking requests.
-- Use the interface in light or dark mode with responsive layouts.
+**For customers**
+- Search studios by name or location, category, hourly price, and capacity
+- Compare rates, refundable deposits, amenities, host details, and reviews
+- Request a date and time with a live price estimate
+- Track booking status from request to confirmation
+- Leave reviews on studios
 
-## Tech stack
+**For hosts**
+- Publish, update, and remove studio listings
+- Review and confirm or decline incoming booking requests
 
-- Next.js 16 App Router, React 19 and TypeScript
-- Tailwind CSS 4 and shadcn/ui components
-- Better Auth with the MongoDB adapter
-- Sonner, Swiper, next-themes and Lucide icons
-- Express API with an HTTPOnly JWT cookie for marketplace data
+**General**
+- Light and dark mode
+- Responsive layouts for mobile, tablet, and desktop
+- Email/password and Google sign-in
 
-## Local setup
+## Tech Stack
 
-1. Install Node.js 20 or newer.
-2. Install the project dependencies:
+| Area | Technology |
+|------|------------|
+| Framework | Next.js 16 (App Router), React 19, TypeScript |
+| Styling | Tailwind CSS 4, shadcn/ui |
+| Auth | Better Auth with the MongoDB adapter |
+| UI extras | Sonner (toasts), Swiper (carousels), next-themes, Lucide icons |
+| Backend | Express API using an HTTP-only JWT cookie for marketplace data |
+| Linting | ESLint |
 
-   ```bash
-   npm ci
-   ```
+## Getting Started
 
-3. Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_API_URL`,
-   `BETTER_AUTH_URL`, `BETTER_AUTH_SECRET` and `MONGODB_URI`. Google sign-in
-   also needs `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`.
-4. Start the separate Express API and MongoDB service.
-5. Start the client:
+### Prerequisites
+
+- Node.js 20 or newer
+- A running instance of the [StudioSpaceServer](https://github.com/masudmoon695-alt/StudioSpaceServer) API
+- A MongoDB database
+- Google OAuth credentials (only for Google sign-in)
+
+### Installation
+
+```bash
+git clone https://github.com/masudmoon695-alt/StudioSpaceClient.git
+cd StudioSpaceClient
+npm ci
+```
+
+### Environment Variables
+
+Copy the example file and fill in your values:
+
+```bash
+cp .env.example .env.local
+```
+
+| Variable | Required | Purpose |
+|----------|----------|---------|
+| `NEXT_PUBLIC_API_URL` | Yes | Base URL of the StudioSpace Express API |
+| `BETTER_AUTH_URL` | Yes | Public URL of this client (for example `http://localhost:3000`) |
+| `BETTER_AUTH_SECRET` | Yes | Long random secret used to sign auth data |
+| `MONGODB_URI` | Yes | MongoDB connection string used by Better Auth |
+| `GOOGLE_CLIENT_ID` | For Google sign-in | Google OAuth client ID |
+| `GOOGLE_CLIENT_SECRET` | For Google sign-in | Google OAuth client secret |
+
+> Never commit `.env.local`. `.env.example` contains placeholders only.
+
+### Run the App
+
+1. Start the Express API and make sure MongoDB is reachable.
+2. Start the client:
 
    ```bash
    npm run dev
    ```
 
-6. Open [http://localhost:3000](http://localhost:3000).
+3. Open [http://localhost:3000](http://localhost:3000).
 
-Run `npm run lint` and `npm run build` to check the client.
+## Scripts
 
-## Examiner account
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start the development server |
+| `npm run build` | Create a production build |
+| `npm run lint` | Run ESLint |
 
-No live deployment or examiner account has been provisioned for this client.
-Create an account through the registration page after configuring a working API
-and MongoDB instance. A reviewer account must be provisioned by the deployment
-owner when a hosted environment is available.
+Run `npm run lint` and `npm run build` before pushing to check the client.
+
+## Project Structure
+
+```
+StudioSpaceClient/
+├── src/                 # App Router pages, components, and utilities
+├── components.json      # shadcn/ui configuration
+├── next.config.ts       # Next.js configuration
+├── eslint.config.mjs    # ESLint configuration
+├── tsconfig.json        # TypeScript configuration
+├── .env.example         # Environment variable template
+└── package.json
+```
+
+## Deployment
+
+The client is set up for deployment on Vercel:
+
+1. Import the repository into Vercel.
+2. Add the environment variables above in the project settings.
+3. Set `BETTER_AUTH_URL` to the deployed client URL and `NEXT_PUBLIC_API_URL` to the deployed API URL.
+4. Add the deployed client origin to `CLIENT_URL` and `CORS_ORIGINS` on the API so credentialed requests are allowed.
+
+## Related
+
+- **API:** [StudioSpaceServer](https://github.com/masudmoon695-alt/StudioSpaceServer): Express and MongoDB backend with studios, bookings, reviews, and image uploads
+
+## Author
+
+**Masud Moon**, CSE student at ULAB
+GitHub: [@masudmoon695-alt](https://github.com/masudmoon695-alt)
